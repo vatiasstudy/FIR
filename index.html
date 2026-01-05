@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Gentle Prank for Jagriti</title>
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0; height:100vh; overflow:hidden;
+      font-family:'Poppins','Segoe UI',sans-serif;
+      background:radial-gradient(circle at top,#0e1326,#050816);
+      color:#eef1ff;
+    }
+
+    /* Pages */
+    .page{position:absolute; inset:0; display:none; align-items:center; justify-content:center; padding:40px; text-align:center}
+    .page.active{display:flex; animation:fade 1s ease forwards}
+    @keyframes fade{from{opacity:0}to{opacity:1}}
+
+    /* Sprinkle */
+    .sprinkle{position:absolute; top:-40px; font-size:18px; pointer-events:none; opacity:.9; animation:fall linear infinite}
+    @keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+
+    /* Paper bordered buttons */
+    .btn{
+      position:absolute; bottom:24px; right:24px;
+      background:#f6efe3; color:#2b2b2b; border:2px dashed #c6b38e;
+      padding:10px 14px; border-radius:10px; cursor:pointer;
+      box-shadow:0 10px 22px rgba(0,0,0,.35);
+      font-size:14px; display:flex; gap:8px; align-items:center
+    }
+
+    /* Name flash */
+    .name{
+      font-size:clamp(44px,10vw,120px); font-weight:800; letter-spacing:2px;
+      background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      animation:flash 2.5s ease-in-out infinite, glow 2s ease-in-out infinite alternate
+    }
+    @keyframes flash{0%,100%{opacity:1}50%{opacity:.6}}
+    @keyframes glow{from{filter:drop-shadow(0 0 6px #fff)}to{filter:drop-shadow(0 0 22px #9ad1ff)}}
+
+    .card{max-width:820px; background:rgba(10,14,40,.55); backdrop-filter:blur(6px);
+      border-radius:16px; padding:28px; box-shadow:0 20px 40px rgba(0,0,0,.45)}
+    .sad{color:#ffb3c6}
+
+    /* Police-station vibe (page 2) */
+    .police{
+      background:
+        linear-gradient(180deg, rgba(15,20,60,.85), rgba(5,8,22,.95)),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 6px, transparent 6px 14px);
+    }
+
+    /* Roll/open file animation */
+    .roll{animation:roll .8s ease both}
+    @keyframes roll{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+
+    .small{font-size:14px; opacity:.9}
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1 -->
+  <div class="page active roll">
+    <div>
+      <div class="name">Jagriti</div>
+      <div class="small">🌈✨ a tiny mysterious gift ✨🌈</div>
+    </div>
+    <button class="btn" onclick="nextPage()">📂 Open File</button>
+  </div>
+
+  <!-- PAGE 2 (Police vibe) -->
+  <div class="page police">
+    <div class="card sad">
+      🚓📄 <b>F.I.R (Just a Prank)</b><br><br>
+      <b>Name:</b> Jagriti<br>
+      <b>Class:</b> 10<br>
+      <b>Charges:</b><br>
+      • Thoda rudely baat karna 😔<br>
+      • Being extremely pretty & beautiful ✨ (serious offence 😌)<br><br>
+      <span class="small">Note: Ye sirf ek joke hai, no real trouble 💙</span>
+    </div>
+    <button class="btn" onclick="nextPage()">📂 Open Next File</button>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="page">
+    <div class="card">
+      🌙😔<br><br>
+      Jagriti… agar meri kisi baat se tumhe bura laga ho,
+      I am really sorry…<br><br>
+      Mera intention kabhi hurt karna nahi tha.
+      Bas thoda sa funny aur honest rehna chahta tha 🌸
+    </div>
+    <button class="btn" onclick="nextPage()">📂 Open Next File</button>
+  </div>
+
+  <!-- PAGE 4 -->
+  <div class="page">
+    <div class="card sad">
+      🌷💫<br><br>
+      Ye FIR bas ek prank tha… promise 🤞<br><br>
+      Sach ye hai ki,
+      I respect you and I just want peace 🌼<br><br>
+      Agar tum chaaho,
+      will you be my friend? 🙂
+    </div>
+  </div>
+
+<script>
+  let i=0; const pages=document.querySelectorAll('.page');
+  function nextPage(){ pages[i].classList.remove('active'); i++; if(i<pages.length){ pages[i].classList.add('active','roll'); }}
+
+  const items=['🌸','🌙','✨','😔','📄'];
+  setInterval(()=>{ const s=document.createElement('div'); s.className='sprinkle'; s.textContent=items[Math.floor(Math.random()*items.length)]; s.style.left=Math.random()*100+'vw'; s.style.animationDuration=4+Math.random()*4+'s'; document.body.appendChild(s); setTimeout(()=>s.remove(),8000); },350);
+</script>
+</body>
+</html>
